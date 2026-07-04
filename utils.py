@@ -307,7 +307,11 @@ def scan_genre_gallery():
     
     files_paths = []
     for root, dirs, files in os.walk(GALLERY_DIR):
+        if "cache" in dirs:
+            dirs.remove("cache")
         for file in files:
+            if file.lower() == "about.jpg":
+                continue
             if file.lower().endswith(valid_extensions):
                 files_paths.append(os.path.join(root, file))
                 
