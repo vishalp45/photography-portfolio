@@ -289,7 +289,7 @@ def classify_image_genre(image_path):
 # Direct scan Desktop folder
 def scan_genre_gallery():
     """
-    Scans the C:/Users/visha/Desktop/sorted_pics directory directly.
+    Scans the C:/Users/visha/Desktop/sorted_pics directory directly (or the local gallery/ directory).
     Dynamically classifies each photo file into one of the 5 portfolio categories
     and returns a dictionary of {category_name: [list_of_image_paths]}.
     """
@@ -305,16 +305,20 @@ def scan_genre_gallery():
         return {}
         
     valid_extensions = ('.jpg', '.jpeg', '.png', '.webp', '.jpg', '.JPG', '.PNG', '.JPEG')
-    files = [f for f in os.listdir(GALLERY_DIR) if os.path.isfile(os.path.join(GALLERY_DIR, f))]
-    files.sort()
     
-    for file in files:
-        if file.lower().endswith(valid_extensions):
-            full_path = os.path.join(GALLERY_DIR, file)
-            # Classify dynamically
-            genre = classify_image_genre(full_path)
-            if genre in gallery_data:
-                gallery_data[genre].append(full_path)
+    files_paths = []
+    for root, dirs, files in os.walk(GALLERY_DIR):
+        for file in files:
+            if file.lower().endswith(valid_extensions):
+                files_paths.append(os.path.join(root, file))
+                
+    files_paths.sort()
+    
+    for full_path in files_paths:
+        # Classify dynamically
+        genre = classify_image_genre(full_path)
+        if genre in gallery_data:
+            gallery_data[genre].append(full_path)
                 
     # Filter out empty categories
     return {k: v for k, v in gallery_data.items() if v}

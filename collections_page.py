@@ -74,12 +74,13 @@ def render_collections_page(gallery_data):
                 filtered_imgs.append((img_path, img_genre, caption, exif))
         
         # Group by aspect ratio to keep similar shapes together, but shuffle group order stably per tab
-        from collections import defaultdict
         import random
         
-        ratio_groups = defaultdict(list)
+        ratio_groups = {}
         for item in filtered_imgs:
             ratio = round(get_image_aspect_ratio(item[0]), 1)
+            if ratio not in ratio_groups:
+                ratio_groups[ratio] = []
             ratio_groups[ratio].append(item)
             
         stable_rng = random.Random(tab_key_name)
