@@ -6,8 +6,7 @@ import base64
 
 # Directories
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ASSETS_DIR = os.path.join(BASE_DIR, "assets")
-CACHE_DIR = os.path.join(ASSETS_DIR, "cache")
+CACHE_DIR = os.path.join(BASE_DIR, "gallery", "cache")
 DESKTOP_PATH = r"C:\Users\visha\Desktop\sorted_pics"
 if os.path.exists(DESKTOP_PATH):
     GALLERY_DIR = DESKTOP_PATH
@@ -78,7 +77,7 @@ def get_optimized_image_path(image_path_or_name, max_width=1000):
         full_path = image_path_or_name
         image_name = os.path.basename(image_path_or_name)
     else:
-        full_path = os.path.join(ASSETS_DIR, image_path_or_name)
+        full_path = os.path.join(BASE_DIR, "gallery", image_path_or_name)
         image_name = image_path_or_name
 
     if not os.path.exists(full_path):

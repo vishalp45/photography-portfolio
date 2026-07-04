@@ -247,7 +247,7 @@ if st.session_state.page == "Home":
     
     col_about_img, col_about_txt = st.columns([1, 1.8])
     with col_about_img:
-        about_img_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "about.jpg")
+        about_img_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gallery", "about.jpg")
         about_opt_path = get_optimized_image_path(about_img_path, max_width=600)
         if os.path.exists(about_opt_path):
             from PIL import Image

@@ -1,0 +1,23 @@
+# Streamlit Caching & Thumbnails
+gallery/cache/
+gallery/cache/*
+**/cache/
+
+# Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local user message logs
+messages.txt
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
